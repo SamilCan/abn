@@ -1,0 +1,167 @@
+{
+  "info": {
+    "_postman_id": "09ecb1dd-f631-420a-b5c6-ed965b86f737",
+    "name": "ABN",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32791518"
+  },
+  "item": [
+    {
+      "name": "getJwtToken",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"admin\",\"password\":\"admin\",\"rememberMe\":false}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/authenticate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "authenticate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Recipe",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTcwNzI0MDI0MX0.OMQ5LfPxU5z3qOLShe5ATLJ44F_eTVv3VfmATYzh7ZTSro6OR-RHFDQbTzgdKj049zSPYhoMIk1cH0rVbxSIgQ",
+            "type": "default"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"recipe1\",\n    \"vegetarian\": true,\n    \"serving\": 2,\n    \"ingredients\": [\"apple\", \"potatoes\"],\n    \"instructions\": \"use oven to bake\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/api/recipes",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "recipes"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Recipes",
+      "request": {
+        "auth": {
+          "type": "jwt",
+          "jwt": [
+            {
+              "key": "algorithm",
+              "value": "HS256",
+              "type": "string"
+            },
+            {
+              "key": "isSecretBase64Encoded",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "key": "payload",
+              "value": "{}",
+              "type": "string"
+            },
+            {
+              "key": "addTokenTo",
+              "value": "header",
+              "type": "string"
+            },
+            {
+              "key": "headerPrefix",
+              "value": "Bearer",
+              "type": "string"
+            },
+            {
+              "key": "queryParamKey",
+              "value": "token",
+              "type": "string"
+            },
+            {
+              "key": "header",
+              "value": "{}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "default",
+            "disabled": true
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTcwNzI0MDI0MX0.OMQ5LfPxU5z3qOLShe5ATLJ44F_eTVv3VfmATYzh7ZTSro6OR-RHFDQbTzgdKj049zSPYhoMIk1cH0rVbxSIgQ",
+            "type": "default"
+          }
+        ],
+        "url": {
+          "raw": "localhost:8080/api/recipes",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "recipes"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Query Recipes",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTcwNzI0MDI0MX0.OMQ5LfPxU5z3qOLShe5ATLJ44F_eTVv3VfmATYzh7ZTSro6OR-RHFDQbTzgdKj049zSPYhoMIk1cH0rVbxSIgQ",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "localhost:8080/api/recipes/query?vegetarian=true&serving=2&searchInstructions=oven&includeIngredients=apple,potatoes",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "recipes", "query"],
+          "query": [
+            {
+              "key": "vegetarian",
+              "value": "true"
+            },
+            {
+              "key": "serving",
+              "value": "2"
+            },
+            {
+              "key": "searchInstructions",
+              "value": "oven"
+            },
+            {
+              "key": "includeIngredients",
+              "value": "apple,potatoes"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
