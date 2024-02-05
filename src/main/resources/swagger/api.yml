@@ -9,16 +9,125 @@ servers:
     description: Development server
   - url: https://localhost:8080/api
     description: Development server with TLS Profile
-paths: {}
-components:
-  responses:
-    Problem:
-      description: error occurred - see status code and problem object for more information.
-      content:
-        'application/problem+json':
+paths:
+  /api/authenticate:
+    post:
+      summary: http://localhost:8080/api/authenticate
+      description: http://localhost:8080/api/authenticate
+      operationId: httpLocalhost8080ApiAuthenticate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: admin
+                rememberMe:
+                  type: boolean
+                  example: false
+                username:
+                  type: string
+                  example: admin
+            examples:
+              http://localhost:8080/api/authenticate:
+                value:
+                  password: admin
+                  rememberMe: false
+                  username: admin
+      responses:
+        '200':
+          description: ''
+  /api/recipes:
+    get:
+      summary: localhost:8080/api/recipes
+      description: localhost:8080/api/recipes
+      operationId: localhost8080ApiRecipes1
+      parameters:
+        - name: ''
+          in: header
           schema:
-            $ref: 'https://opensource.zalando.com/problem/schema.yaml#/Problem'
-
+            type: string
+            example: ''
+      responses:
+        '200':
+          description: ''
+      security:
+        - jwtBearerAuth: []
+    post:
+      summary: localhost:8080/api/recipes
+      description: localhost:8080/api/recipes
+      operationId: localhost8080ApiRecipes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ingredients:
+                  type: array
+                  items:
+                    type: string
+                    example: apple
+                  example:
+                    - apple
+                    - potatoes
+                instructions:
+                  type: string
+                  example: use oven to bake
+                name:
+                  type: string
+                  example: recipe1
+                serving:
+                  type: number
+                  example: 2
+                vegetarian:
+                  type: boolean
+                  example: true
+            examples:
+              localhost:8080/api/recipes:
+                value:
+                  ingredients:
+                    - apple
+                    - potatoes
+                  instructions: use oven to bake
+                  name: recipe1
+                  serving: 2
+                  vegetarian: true
+      responses:
+        '200':
+          description: ''
+  /api/recipes/query:
+    get:
+      summary: localhost:8080/api/recipes/query?serving=2&searchInstructions=oven
+      description: localhost:8080/api/recipes/query?serving=2&searchInstructions=oven
+      operationId: localhost8080ApiRecipesQueryServing2SearchinstructionsOven
+      parameters:
+        - name: vegetarian
+          in: query
+          schema:
+            type: string
+            example: 'true'
+        - name: serving
+          in: query
+          schema:
+            type: string
+            example: '2'
+        - name: searchInstructions
+          in: query
+          schema:
+            type: string
+            example: oven
+        - name: includeIngredients
+          in: query
+          schema:
+            type: string
+            example: apple,potatoes
+      responses:
+        '200':
+          description: ''
+components:
   securitySchemes:
     jwt:
       type: http
